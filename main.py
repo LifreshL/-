@@ -12,7 +12,7 @@ def leng(f, g):
 
 sc = pygame.display.set_mode((M, N))
 
-pygame.display.set_caption('This is fine !')
+pygame.display.set_caption('Under the light')
 
 clock = pygame.time.Clock()
 
@@ -71,7 +71,7 @@ while flend:
                 (z, t) = event.pos
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_e:
-                if paradox and countparaox <= 7:
+                if paradox and countparaox <= 6:
                     countparaox += 1
                 elif paradox:
                     pygame.quit()
@@ -102,7 +102,7 @@ while flend:
             pygame.draw.rect(Map, (0, 100, 0), (x - 2, y - 2, 4, 4))
             dead_body[bodycount] = (x, y)
             bodycount += 1
-            (x, y) = (M // 2, N // 2)
+            (x, y) = (760, 430)
             trap = False
             isdead = True
     if focus <= 4 and not pause and not motionblock:
@@ -167,6 +167,11 @@ while flend:
         from Map_Zone_Text import Text0
 
         sc.blit(Text0.serf, Text0.serf.get_rect(center=(M // 2, N // 2)))
+    elif paradox:
+        pause = True
+        from Map_Zone_Text import Text6
+
+        sc.blit(Text6[countparaox].serf, Text6[countparaox].serf.get_rect(center=(M // 2, N // 2)))
     elif pause and tuple(Zone.get_at((x, y))) == (0, 0, 255, 255):
         from Map_Zone_Text import Text1
 
@@ -197,11 +202,6 @@ while flend:
         from Map_Zone_Text import Text5
 
         sc.blit(Text5.serf, Text5.serf.get_rect(center=(M // 2, N // 2)))
-    elif paradox:
-        pause = True
-        from Map_Zone_Text import Text6
-
-        sc.blit(Text6[countparaox].serf, Text6[countparaox].serf.get_rect(center=(M // 2, N // 2)))
 
     pygame.display.update()
     clock.tick(FPS)
